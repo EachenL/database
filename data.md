@@ -48,7 +48,7 @@
 
 `alter table <表名> ` 
 
-`[add <新列名> <数据类型> [完整性约束]] `
+` [add [完整性约束] <新列名> <数据类型>]` 
 
  `[drop <完整性约束名>] `
 
@@ -74,7 +74,7 @@
 
 ### 3.4 数据查询
 
-`select [all | distinct] <目标列表达式> [,<目标列表达式>]...`
+`select [<聚集函数> ([all | distinct] <目标列表达式> [,<目标列表达式>]...)]`
 
 `from <表名或视图名> [,<表名或视图名>]...`
 
@@ -103,11 +103,44 @@
 ##### 2. 选择表中的若干元组
 
 1. 消除取值重复的行
+
+   `select distinct sno from sc`
+
 2. 查询满足条件的元组
+
+   | 查询条件 | 谓词                                       |
+   | :--- | :--------------------------------------- |
+   | 比较   | =, >, <, >=, <=, != or <>, !>, !<; not+上述运算符 |
+   | 确定范围 | between and, not between and             |
+   | 确定集合 | in, not in                               |
+   | 字符匹配 | like, not like                           |
+   | 空值   | is null, is not null                     |
+   | 逻辑运算 | and, or, not                             |
+
+   <条件表达式> = <列名> <查询谓词> <条件>
+
+   (1) 比较 `sdept = 'cs'` `sage < 20` 
+
+   (2) 范围`sage between 20 and 23` 
+
+   (3) 集合`sdept not in ('cs','ma','is')`
+
+   (4) 字符 `sno like '1501'` `sname like '刘%'` `sname like '欧阳__'` `sname like '__阳%'` 
+   `cname like 'db\_design' escape '\'` 
+
+   (5) 空值`grade is null` 
+
+   (6) 逻辑`sdept = 'cs' or sdept = 'ma' or sdept = 'is'`
 
 ##### 3. order by子句
 
+​	`order by sdept, sage desc;`sdept 为升序 缺省
+
 ##### 4. 聚集函数
+
+​	`count` `sum` `avg` `max` `min` 
+
+​	select <函数> ( [d | a] <列名>| * ) 
 
 ##### 5. group by子句
 
