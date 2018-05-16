@@ -22,7 +22,9 @@
 
 #####1. 定义模式
 
-`create schema <模式名> authorization <用户名> [<表定义子句> | <视图定义子句> | <授权定义子句>]`
+`create schema <模式名>  authorization <用户名> `
+
+`[<表定义子句> | <视图定义子句> | <授权定义子句>]`
 
 #####2. 删除模式
 
@@ -32,7 +34,11 @@
 
 #####1. 定义基本表
 
-`create table <表名> ( <列名> <数据类型> [列级完整性约束条件] [, ...] [, <表级完整性约束条件>]);`
+` create table <表名> `  
+
+`( <列名> <数据类型> [列级完整性约束条件][, ...] `
+
+` [, <表级完整性约束条件>]);`
 
 #####2. 删除基本表
 
@@ -40,27 +46,59 @@
 
 #####3. 修改基本表
 
-`alter table <表名> [add <新列名>]`
+`alter table <表名> ` 
+
+`[add <新列名> <数据类型> [完整性约束]] `
+
+ `[drop <完整性约束名>] `
+
+ `[alter column <列名> <数据类型>]; `
 
 #####4. 模式与表
 
 #####5. 表的数据类型
 
-####3.3.3 索引的建立与删除
+`char(n)` `varchar(n)` `int` `smallint` `numeric(p,d)` `real` `double precision` `float` `date` `time` 
+
+#### 3.3.3 索引的建立与删除
 
 #####1. 建立索引
 
+`create [unique] [cluster] index <索引名> on <表名> `
+
+`(<列名> [<次序>][,<列名> [<次序>]]...);`
+
 #####2. 删除索引
 
+`drop index <索引名>;`
+
 ### 3.4 数据查询
+
+`select [all | distinct] <目标列表达式> [,<目标列表达式>]...`
+
+`from <表名或视图名> [,<表名或视图名>]...`
+
+`[where <条件表达式>]`
+
+`[group by <列名1> [having <条件表达式>]]`
+
+`[order by <列名2> [asc | desc]];`
 
 #### 3.4.1 单表查询
 
 #####1. 查询表中若干列
 
 1. 查询指定列
+
+   `select sno, sname from student;`
+
 2. 查询全部列
+
+   `select * from student;`
+
 3. 查询经过计算的值
+
+   `select sname, 2004-sage from student;`
 
 ##### 2. 选择表中的若干元组
 
