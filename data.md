@@ -32,7 +32,7 @@
 
 #### 3.3.2 基本表的定义与删除
 
-#####1. 定义基本表
+#####1. 定义基本表`表定义子句`
 
 ` create table <表名> `  
 
@@ -144,25 +144,55 @@
 
 ##### 5. group by子句
 
-#### 3.4.2 链接查询
+​	`group by cno;`
+
+#### 3.4.2 连接查询
 
 ##### 1. 等值与非等值连接查询
 
+​	`where studen.sno = sc.sno;`
+
 ##### 2. 自身连接
+
+​	`select first.cno, second.cpno `
+
+​	`from course first, course second `
+
+​	`where first.cpno = second.cno;`
 
 ##### 3. 外连接
 
+​	`from student left out join sc on (student.sno = sc.sno);`或
+
+​	`from student left out join sc using (sno)`;
+
 ##### 4. 符合条件连接
+
+​	`where student.sno = sc.sno and sc.cno = '2' and sc.grade > 90;`
+
+​	`where student.sno = sc.sno and sc.cno = course.cno;`
 
 #### 3.4.3 嵌套查询
 
 ##### 1. 带有in谓词的子查询
 
+​	`where sdept in(select sdept from student where sname = '刘晨');`
+
 ##### 2. 带有比较运算符的子查询
+
+​	`where sdept = ();`
+
+​	`where () = sdept;`
+
+ 	`where grade >= (select avg(grade) from sc y where y.sno = x.sno);`
 
 #####3. 带有any(some)或all谓词的子查询
 
+​	<比较运算符>< any | all >
+
 ##### 4. 带有exists谓词的子查询
+
+​	`where not exists (select* from sc where sno = student.sno and cno = '1');`
 
 #### 3.4.4 集合查询
 
