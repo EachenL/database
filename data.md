@@ -250,25 +250,47 @@
 
 ​	`insert `
 
-​	`into <> [ ( <属性列1> [ ,<属性列2>] ... ) ] `
+​	`into <表名> [ ( <属性列1> [ ,<属性列2>] ... ) ] `
 
 ​	`子查询;`
 
 #### 3.5.2 修改数据
 
+​	`update <表名> `
+
+​	`set <列名> = <表达式> [ , <列名> = <表达式>]... `
+
+​	`[where <条件>];`
+
 ##### 1. 修改某一个元组的值
+
+​	`update student set age = 22 where sno = '1501';`
 
 ##### 2. 修改多个元组的值
 
+​	`update student set age = age + 1;`
+
 ##### 3. 带子查询的修改语句
+
+​	`update sc set grade = 0 `
+
+​	`where 'cs' = (select sdept from student where student.sno = sc.sno);`
 
 #### 3.5.3 删除数据
 
+​	`delete from <表名> [where <条件>];`
+
 ##### 1. 删除某一个元组的值
+
+​	`delete from student where sno = '1501';`
 
 ##### 2. 删除多个元组的值
 
+​	`delete from sc;`
+
 ##### 3. 带子查询的删除语句
+
+​	`delete from sc where 'cs' = (select sdept from student where student.sno = sc.sno);`
 
 ### 3.6 视图
 
@@ -276,13 +298,31 @@
 
 ##### 1. 建立视图
 
+​	`create view <视图名> [ ( <列名> [,<列名>]...) ] `
+
+​	`as <子查询> `
+
+​	`[with check optionn];`
+
 ##### 2. 删除视图
+
+​	`drop view <视图名> [cascade];`
 
 #### 3.6.2 查询视图
 
+​	可视为表操作
+
 #### 3.6.3 更新视图
 
+​	`update修改` `delete删除 ` `insert插入`可视为对表操作
+
 #### 3.6.4 视图的作用
+
+ 	1. 简化用户操作
+	2. 可以从多角度看待统一数据
+	3. 对重构数据库提供一定程度的逻辑独立性
+	4. 对机密数据提供安全保护
+	5. 更清晰的表达查询
 
 ## 第四章 数据库安全性
 
